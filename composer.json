@@ -1,0 +1,17 @@
+{
+    "name": "jwix/miniprojet2",
+    "require": {
+        "dompdf/dompdf": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jwix\\Miniprojet2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jwix",
+            "email": "jaouik61@gmail.com"
+        }
+    ]
+}

@@ -13,13 +13,19 @@ $quiz_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="row">
     <div class="col-md-12">
-        <h1 class="mb-4">Plateforme de Quiz</h1>
+        <!-- <h1 class="mb-4">Plateforme de Quiz</h1> -->
         
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Quiz disponibles</h2>
-            <a href="admin/create_quiz.php" class="btn btn-primary">
+            <!-- <a href="admin/create_quiz.php" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> Créer un nouveau quiz
-            </a>
+            </a> -->
+            <button type="button" class="btn btn-info ms-2" data-bs-toggle="modal" data-bs-target="#myResultsModal">
+            📊 Mes résultats
+            </button>
+        </div>
+        <div class="mb-4">
+            <input type="text" id="quizSearch" class="form-control" placeholder="Rechercher un quiz par titre ou description...">
         </div>
 
         <?php if (empty($quiz_list)): ?>
@@ -69,5 +75,51 @@ $quiz_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
     </div>
 </div>
+<!-- Modal Mes résultats -->
+<div class="modal fade" id="myResultsModal" tabindex="-1" aria-labelledby="myResultsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="myResultsModalLabel">Consulter mes résultats</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Entrez votre nom et votre email (facultatif) pour voir tous les quizzes que vous avez réussis (score ≥ 60 %) et télécharger vos certificats.</p>
+                <form method="POST" action="view_my_results.php">
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom complet <span class="text-danger">*</span></label>
+                        <input type="text" name="nom" id="nom" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email (facultatif)</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                        <small class="text-muted">Utilisé pour une recherche plus précise si plusieurs personnes ont le même nom.</small>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Rechercher mes résultats</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('quizSearch').addEventListener('keyup', function() {
+    const filter = this.value.toLowerCase();
+    const cards = document.querySelectorAll('.col-md-6.col-lg-4.mb-4');
+    
+    cards.forEach(card => {
+        const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+        const desc = card.querySelector('.card-text')?.textContent.toLowerCase() || '';
+        
+        if (title.includes(filter) || desc.includes(filter)) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+</script>
 
 <?php require_once 'includes/footer.php'; ?>

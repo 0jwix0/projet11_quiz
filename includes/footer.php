@@ -1,12 +1,12 @@
 </div> <!-- Fermeture container -->
     
-    <footer class="mt-5 py-4 text-center text-white">
+    <footer class="mt-5 py-4 text-center text-muted">
         <div class="container">
             <p class="mb-0">
-                &copy; <?= date('Y') ?> Plateforme de Quiz. Tous droits réservés.
+                &copy; <?= date('Y') ?> Anigma. Tous droits réservés.
             </p>
             <p class="small mb-0 mt-2">
-                Développé avec <i class="bi bi-heart-fill text-danger"></i> en PHP & Bootstrap
+                Développé avec <i class="bi bi-heart-fill text-danger"></i> par YASSINE JAOUIK
             </p>
         </div>
     </footer>
